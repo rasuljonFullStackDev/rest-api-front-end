@@ -12,7 +12,7 @@ export const productReducer = (state = initialValues, { type, payload }) => {
     case actionType.productAdd:
       return {
         ...state,
-        product:payload.reverse(),
+        product:payload,
       };
     case actionType.productEdit:
       return {

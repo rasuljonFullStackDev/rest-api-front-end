@@ -11,21 +11,22 @@ const Login = () => {
   const dispath = useDispatch();
 
   const onFinish = (values) => {
-    dispath(load(true));
+    // dispath(load(true));
     axios
       .get("/user/")
       .then((res) => {
-        console.log(res.data);
+   
         let data = [...res.data];
-        if (res.status === 200 && data.length > 0) {
-          let res =
-            data.filter(
+        if (res.status === 200) {
+          let ress =
+            [...res.data].filter(
               (item) =>
                 item.username === values.username &&
                 item.password === window.btoa(values.password)
             ) || [];
-          if (res.length === 1) {
-            dispath(userDetil({ ...res[0], rules: true }));
+            console.log(ress);
+          if (ress.length === 1) {
+            dispath(userDetil({ ...ress[0], rules: true }));
             Swal.fire({
               title: "Tabriklayman ",
               text: "Siz shaxsiy profiliga kirdingiz!",
@@ -34,6 +35,7 @@ const Login = () => {
               timer: 2000,
               showConfirmButton: false,
             });
+            
             dispath(load(false));
           }else{
             Swal.fire({

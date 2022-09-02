@@ -13,7 +13,6 @@ const initialValues = {
 export const profileReducer = (state = initialValues, { type, payload }) => {
   switch (type) {
     case actionType.user:
-      console.log(payload);
       localStorage.setItem("profile", JSON.stringify(payload));
       return {
         ...state,

@@ -7,9 +7,9 @@ import {
   UserOutlined,
   LogoutOutlined,
   BarChartOutlined,
-  HistoryOutlined ,
+  HistoryOutlined,
   UsergroupAddOutlined,
-  UserSwitchOutlined
+  UserSwitchOutlined,
 } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import { Avatar, Button, Tooltip } from "antd";
@@ -42,7 +42,9 @@ const Layout = ({ content }) => {
       <div className="gridLayout">
         <nav className={menu ? "saidbarLayout active" : "saidbarLayout"}>
           <div className="navlogo">
-            <img src="./logo/logo.png" alt="" />
+            <NavLink to="/">
+              <img src="./logo/logo.png" alt="" />
+            </NavLink>
             <span></span>
           </div>
           <ul className="navItem">
@@ -51,58 +53,18 @@ const Layout = ({ content }) => {
                 <span>
                   <BarsOutlined />
                 </span>
-                <span>Kategory</span>
+                <span>Cars</span>
               </NavLink>
             </li>
             <li>
               <NavLink to="/product">
                 <span>
-                <InboxOutlined />
+                  <InboxOutlined />
                 </span>
-                <span>Maxsulot</span>
+                <span>Blog</span>
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/users">
-                <span>
-                <UserSwitchOutlined />
-                </span>
-                <span>Admin</span>
-              </NavLink>
-            </li>
-           
-            <li>
-              <NavLink to="/cart">
-                <span>
-                  <CreditCardOutlined />
-                </span>
-                <span>Karta raqam</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/profile">
-                <span>
-                <UsergroupAddOutlined />
-                </span>
-                <span>Foydalanavchi</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/order">
-                <span>
-                <HistoryOutlined />
-                </span>
-                <span>Buyurtmalar</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/result">
-                <span>
-                <BarChartOutlined />
-                </span>
-                <span>Hisobot</span>
-              </NavLink>
-            </li>
+         
           </ul>
         </nav>
         <div className="contentLayaot">

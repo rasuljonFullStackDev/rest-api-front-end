@@ -10,8 +10,9 @@ import { usersAdd } from "../action/usersAction";
 import { orderItemAdd } from "../action/orderItemAction";
 import { profileAdd, userDetil, userLogout } from "../action/profileAction";
 import { useNavigate } from "react-router-dom";
+import { carsAdd } from "../action/carsAction";
 export const Config = ({ dispatch }) => {
-  const { categoryUpdate } = useSelector((state) => state.categoryReducer);
+  const { carsUpdate } = useSelector((state) => state.carsReducer);
   const { productUpdate } = useSelector((state) => state.productReducer);
   const { orderItemUpdate } = useSelector((state) => state.orderItemReducer);
   const { cartUpdate } = useSelector((state) => state.cartReducer);
@@ -21,7 +22,44 @@ export const Config = ({ dispatch }) => {
   const { rules } = user;
   const path = useNavigate()
   // tekshiruv
- 
+  // useEffect(() => {
+  //   const UserRule = async () => {
+  //     let res = await axios.get("/user/");
+  //     let data = [...res.data];
+  //     if (res.status === 200 && data.length > 0) {  
+  //       let ress =
+  //         data.filter(
+  //           (item) =>
+  //           (  item.username === user.username &&
+  //             item.password ===user.password
+  //            ) 
+  //         ) || [];
+        
+  //       if (ress.length === 0) {
+  //         dispatch(userLogout());
+  //         path('/')
+  //       }
+  //     }
+  //   };
+
+  //   if (rules) {
+  //     UserRule();
+  //   }
+  // }, []);
+  // cars
+  useEffect(() => {
+    const cars = async () => {
+      let res = await axios.get("/cars/");
+   
+      if (res.status === 200) {  
+       dispatch(carsAdd(res.data))
+      }
+    };
+
+    if (rules) {
+      cars();
+    }
+  }, [carsUpdate]);
   return (
     <div className={load ? "load activ" : "load"}>
       <img src="/img/load.svg" alt="" />

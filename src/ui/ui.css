@@ -10,6 +10,7 @@
 h1, h2, h3, h4, h5, h6{
   margin-bottom: 0;
 }
+
 .load{
   position: fixed;
   top: 0;
@@ -97,7 +98,7 @@ html {
 }
 
 .menuToggle {
-  position: relative;
+  position: sticky;
   z-index: 999;
   top: 85px;
   transform: translateX(-35px);
@@ -222,23 +223,41 @@ html {
 }
 .headerContent{
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   justify-content: space-between;
   align-items: center;
   background: white;
   margin-bottom: 5px;
   padding: 5px 20px;
 }
+.pro{
+  padding:0 10px ;
+}
 .profiles{
   display: flex;
   align-items: center;
   gap: 20px;
 }
+.navlogo img{
+  transition: all 0.5s ease-in-out;
+}
+.saidbarLayout.active .navlogo img{
+transform: translateX(-25px);
+}
+
 @media (max-width: 991px) {
   .contentLayaot {
     width: calc(100% - 88px);
     left: 88px;
   }
-
+  .saidbarLayout.active .navlogo img{
+    transform: translateX(0);
+    }
+    .saidbarLayout .navlogo img{
+      transform: translateX(-25px);
+      }
   .saidbarLayout.active {
     width: 260px;
   }
@@ -285,10 +304,10 @@ html {
     gap: 8px;
   }
   .menuToggle {
-    left: 60px;
+    left: 10px;
   }
   .menuToggle.active{
-    left: 180px;
+    left: 0px;
   }
   .navlogo{
     padding: 22px;

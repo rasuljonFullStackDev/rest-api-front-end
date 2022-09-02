@@ -12,7 +12,7 @@ export const categoryReducer = (state = initialValues, { type, payload }) => {
     case actionType.categoryAdd:
       return {
         ...state,
-        category: payload.reverse(),
+        category: payload,
       };
     case actionType.categoryEdit:
       return {
