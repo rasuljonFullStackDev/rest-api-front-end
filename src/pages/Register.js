@@ -20,10 +20,10 @@ const Register = () => {
     axios
       .post("/register/",formdata)
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         const {token} = res.data;
         if(res.status===201 && token){
-         dispath( userDetil({...values,token:token,rules:true}))
+         dispath( userDetil({...res.data,rules:true}))
         }
       })
       .catch((err) => {
