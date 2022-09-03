@@ -59,9 +59,7 @@ import {
       setVisible(false)
       if (editAdd) {
         axios
-          .put(`/cars/${e.id}/`,{...e,
-            // parent:e.parent_edit===cars.filter(item=>item.id===e.parent)[0].title || '' ? e.parent : e.parent_edit || null
-            })
+          .put(`/cars/?id=${e.id}`,e)
           .then((res) => {
             if (res.status === 200) {
               dispatch(carsEdit({...e,
@@ -103,6 +101,7 @@ import {
               });
               dispatch(carsUpdate());
               dispatch(load(false));
+              setFile({})
             } else {
               Toast.fire({
                 icon: "warning",
@@ -131,11 +130,11 @@ import {
       setEdits(e)
       setEditAdd(true);
       form.setFieldsValue({
-        title: e.title,
-        status: e.status,
-        parent: e.parent,
+        name: e.name,
+        description: e.description,
+        price: e.price,
         id: e.id,
-        // parent_edit:e.parent===null ? '' :  cars.filter(item=>item.id===e.parent)[0] ? cars.filter(item=>item.id===e.parent)[0].title || '' : ' '
+        image:e.photo
       });
       setVisible(true);
     };
@@ -152,7 +151,7 @@ import {
       axios
         .delete(`/cars/?id=${id}`)
         .then((res) => {
-          if (res.status === 204) {
+          if (res.status === 200) {
             Toast.fire({
               icon: "success",
               title: "Malumot o`chrildi",
@@ -348,7 +347,7 @@ import {
             <Form.Item
               label="Car price "
               name="img"
-              rules={[{ required: true, message: "Car price !" }]}
+              rules={[{ required: !editAdd, message: "Car price !" }]}
               hasFeedback
               onChange={(e)=>{
                 setFile(e.target.files[0])
@@ -367,6 +366,23 @@ import {
             <Form.Item name="id" style={{ display: "none" }}>
               <Input placeholder="maoshini" type="hidden" />
             </Form.Item>
+            {editAdd ? (
+            <Form.Item name="image">
+              <Input
+                placeholder="maoshini"
+                style={{
+                  height: "150px",
+                  objectFit: "cover",
+                }}
+                src={form.getFieldValue().image}
+                type="image"
+              />
+            </Form.Item>
+          ) : (
+            ""
+          )}
+
+
             <Form.Item>
               <Button type="primary" htmlType="submit">
                 {editAdd ? "Yangilash" : "Qo'shish"}
