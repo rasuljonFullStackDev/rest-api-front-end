@@ -56,10 +56,15 @@ import {
     const [file,setFile] = useState({});
     const onFinish = (e) => {
       dispatch(load(true));
-      setVisible(false)
+      // setVisible(false)
       if (editAdd) {
+        let formData = new FormData();
+        formData.append('name',e.name);
+        formData.append('description',e.description);
+        formData.append('price',e.price);
+        formData.append('img',file);
         axios
-          .put(`/cars/?id=${e.id}`,e)
+          .post(`/cars/update/?id=${e.id}`,formData)
           .then((res) => {
             if (res.status === 200) {
               dispatch(carsEdit({...e,
@@ -191,10 +196,10 @@ import {
       },
       {
         title: "Img",
-        dataIndex: "img",
-        key: "img",
-        render: (img) => {
-         return <img src={`http://localhost/rest-api-back-end/src/controller${img}`}/>
+        dataIndex: "id",
+        key: "id",
+        render: (id) => {
+         return <img src={`http://localhost//rest-api-back-end/v1/api/file/?id=${id}`}/>
         },
      
       },
@@ -350,6 +355,14 @@ import {
               rules={[{ required: !editAdd, message: "Car price !" }]}
               hasFeedback
               onChange={(e)=>{
+                console.log(e.target.files['File']);
+                console.log(JSON.stringify([e.target.files[0]]));
+                console.log(e.target.files[0]);
+                console.log(e.target.files[0].name);
+                console.log(e.target.files[0].lastModified);
+                console.log(e.target.files[0].lastModifiedDate);
+                console.log(e.target.files[0][0 ]);
+
                 setFile(e.target.files[0])
               }}
             >
@@ -436,6 +449,7 @@ import {
           }}
          
         />
+        <img src="http://localhost/rest-api-back-end/v1/api/file/?id=14" alt="sas" />
       </div>
     );
   };
